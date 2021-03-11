@@ -36,13 +36,10 @@ define([
       var element = this;
       this.toggleFields(element);
       var postcodeMask = this.mask;
-      $("#" + this.uid).mask(postcodeMask);
+      $("#" + this.uid).mask(postcodeMask).focus().trigger("keyup").triggerHandler("keyup");
       return this;
     },
     toggleFields(element) {
-      if (this.value()) {
-        var validate = this.validate().valid;
-        if (validate === true && this.value().length === 9) {
           if (registry.get(element.parentName + "." + "street.0")) {
             registry.get(element.parentName + "." + "street.0").visible(true);
           }
@@ -61,27 +58,6 @@ define([
           if (registry.get(element.parentName + "." + "region_id")) {
             registry.get(element.parentName + "." + "region_id").visible(true);
           }
-        }
-      } else {
-        if (registry.get(element.parentName + "." + "street.0")) {
-          registry.get(element.parentName + "." + "street.0").visible(false);
-        }
-        if (registry.get(element.parentName + "." + "street.1")) {
-          registry.get(element.parentName + "." + "street.1").visible(false);
-        }
-        if (registry.get(element.parentName + "." + "street.2")) {
-          registry.get(element.parentName + "." + "street.2").visible(false);
-        }
-        if (registry.get(element.parentName + "." + "street.3")) {
-          registry.get(element.parentName + "." + "street.3").visible(false);
-        }
-        if (registry.get(element.parentName + "." + "city")) {
-          registry.get(element.parentName + "." + "city").visible(false);
-        }
-        if (registry.get(element.parentName + "." + "region_id")) {
-          registry.get(element.parentName + "." + "region_id").visible(false);
-        }
-      }
       return this;
     },
     onUpdate() {
